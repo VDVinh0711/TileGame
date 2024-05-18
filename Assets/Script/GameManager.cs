@@ -19,30 +19,26 @@ public class GameManager : Singleton<GameManager>
         IsPause = true;
         //Call UI Win
     }
-
     public void Lose()
     {
         print("lose");
         OnLose?.Invoke();
         IsPause = true;
+        _tilePicker.CanPick = false;
         //Call UI Lose
     }
-    
     public void Reload()
     {
         LevelManager.Instance.LoadCurrentlevel();
         _tilePicker.Reset();
-        IsPause = true;
         
     }
-
     public void NextLevel()
     {
         LevelManager.Instance.NextLevel();
         _tilePicker.Reset();
         
     }
-    
     public void Clear()
     {
         IsPause = false;

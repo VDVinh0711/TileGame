@@ -45,15 +45,19 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.17f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\SpawnTile.cs" />
-    <Compile Include="Assets\Tile.cs" />
-    <Compile Include="Assets\Script\LevelManager.cs" />
-    <Compile Include="Assets\Script\PoolingTile.cs" />
+    <Compile Include="Assets\Script\Game\PoolingTile.cs" />
+    <Compile Include="Assets\Script\Game\LevelManager.cs" />
+    <Compile Include="Assets\Script\Game\Tile.cs" />
+    <Compile Include="Assets\Script\Game\SpawnTile.cs" />
+    <Compile Include="Assets\Script\UI\UI_ChoseLevel.cs" />
+    <Compile Include="Assets\Script\Game\TimeManager.cs" />
+    <Compile Include="Assets\Script\UI\UI_ButtonChoseLevel.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
-    <Compile Include="Assets\Script\Singleton.cs" />
-    <Compile Include="Assets\Script\TilePicker.cs" />
-    <Compile Include="Assets\Script\GameRule.cs" />
-    <Compile Include="Assets\Script\TimeManager.cs" />
+    <Compile Include="Assets\Script\UI\UI_MainMenu.cs" />
+    <Compile Include="Assets\Script\Enum\StatePosTile.cs" />
+    <Compile Include="Assets\Script\Game\TilePicker.cs" />
+    <Compile Include="Assets\Script\Game\Singleton.cs" />
+    <Compile Include="Assets\Script\Game\GameRule.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
