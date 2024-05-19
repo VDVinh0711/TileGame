@@ -1,7 +1,6 @@
 
-using UnityEngine;
 
-public class GameRule : MonoBehaviour
+public class GameRule 
 {
     const int amountDupRequire = 3;
 

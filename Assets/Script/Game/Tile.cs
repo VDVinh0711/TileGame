@@ -4,21 +4,22 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
    
-   [SerializeField]  private Rigidbody rb;
-   [SerializeField] private Collider coli;
+   [SerializeField]  private Rigidbody _rb;
+   [SerializeField] private Collider _coli;
    public string id;
-   public SpriteRenderer Sprite;
+   public MeshRenderer mesrenderer;
    public StatePosTile StatePosTile;
-
+   
    public void SetGravty()
    {
-      rb.useGravity = true;
-      rb.isKinematic = false;
+    
+      _rb.useGravity = true;
+      _rb.isKinematic = false;
    }
    public void UnSetGravity()
    {
-      rb.useGravity = false;
-      rb.isKinematic = true;
+      _rb.useGravity = false;
+      _rb.isKinematic = true;
    }
    private void OnEnable()
    {
@@ -27,6 +28,6 @@ public class Tile : MonoBehaviour
    public void SetUpTile(string id, Sprite sprite)
    {
       this.id = id;
-      this.Sprite.sprite = sprite;
+      this.mesrenderer.material.mainTexture = sprite.texture;
    }
 }

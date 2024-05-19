@@ -66,9 +66,11 @@ public class TilePicker : MonoBehaviour
       var  result = _gameRule.Check(containerTile.ToArray(),out string res);
       if (result)
       {
+          
           StartCoroutine(DropOutItemInList(res));
           if (_quantityPicker != LevelManager.Instance.GetTotalTileInLevel()) return;
           _canpick = false;
+          
            GameManager.Instance.Win();
           return;
       }

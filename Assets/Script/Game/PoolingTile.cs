@@ -24,9 +24,9 @@ public class PoolingTile : Singleton<PoolingTile>
       {
          _container.Remove(obj);
          obj.gameObject.SetActive(true);
+         obj.position = Vector3.zero;
          return obj;
       }
-      var spawnNew = Instantiate(_objPrefabs);
-      return spawnNew;
+      return  Instantiate(_objPrefabs,Vector3.zero, Quaternion.identity);
    }
 }

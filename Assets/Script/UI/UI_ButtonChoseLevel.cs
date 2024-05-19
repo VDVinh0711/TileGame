@@ -1,10 +1,10 @@
 
-using System;
+
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Serialization;
+
 using UnityEngine.UI;
 
 
@@ -24,8 +24,6 @@ namespace  UI_Game
         {
             _button.onClick.AddListener(ActionButtonClick);
         }
-
-
         public void SetUpLevel(LevelConfig levelConfig, int indexlevel)
         {
            if(levelConfig == null) return;
@@ -47,10 +45,11 @@ namespace  UI_Game
         private void ActionButtonClick()
         {
             LevelManager.Instance.CurrentLevel = indexLevel;
-            LevelManager.Instance.LoadCurrentlevel();
+            GameManager.Instance.PlayGame();
         }
-        
-        
+
+
+     
     }
 
 }

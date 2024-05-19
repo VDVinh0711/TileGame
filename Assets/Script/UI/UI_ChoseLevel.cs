@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace  UI_Game
 {
-    public class UI_ChoseLevel : MonoBehaviour
+    public class UI_ChoseLevel : MonoBehaviour,IUiController
     {
         
         [SerializeField] private Transform _buttonPrefap;
@@ -32,12 +32,20 @@ namespace  UI_Game
                     btnUI = btnSpawn.GetComponent<UI_ButtonChoseLevel>();
                     _listUILevel.Add(btnUI);
                 }
-                btnUI.SetUpLevel(levelManager.Levels[i],i);
+                btnUI.SetUpLevel(levelManager.Levels[i],i+1);
             }
         }
 
 
-      
+        public void OpenUi()
+        {
+            _panel.gameObject.SetActive(true);
+        }
+
+        public void CloseUI()
+        {
+          _panel.gameObject.SetActive(false);
+        }
     }
 
 }

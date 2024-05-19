@@ -365,9 +365,13 @@
 "Assets/Script/Game/TilePicker.cs"
 "Assets/Script/Game/TimeManager.cs"
 "Assets/Script/GameManager.cs"
+"Assets/Script/UI/IUiController.cs"
 "Assets/Script/UI/UI_ButtonChoseLevel.cs"
 "Assets/Script/UI/UI_ChoseLevel.cs"
+"Assets/Script/UI/UI_InGame.cs"
 "Assets/Script/UI/UI_MainMenu.cs"
+"Assets/Script/UI/UI_Manager.cs"
+"Assets/Script/UI/UI_MenuIngame.cs"
 -langversion:9.0
 
 /deterministic

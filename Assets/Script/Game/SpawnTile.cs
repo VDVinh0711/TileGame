@@ -12,7 +12,7 @@ public class SpawnTile : MonoBehaviour
     [SerializeField] private float _maxY;
     [SerializeField] private float _minY;
     
-    [SerializeField] private float minimumDistance = 2f;
+    [SerializeField] private float minimumDistance = 0.5f;
     [SerializeField] private int maxAttempts = 100;
     [SerializeField] private Transform _holder;
 
@@ -49,6 +49,7 @@ public class SpawnTile : MonoBehaviour
                     tileInstance.position = spawnPosition;
                     tileInstance.rotation = spawnRotation;
                     allTileObj.Add(tileInstance);
+                    tileInstance.position = spawnPosition;
                     Rigidbody rigidbody = tileInstance.GetComponent<Rigidbody>();
                     if (rigidbody != null)
                     {

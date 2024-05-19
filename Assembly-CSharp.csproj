@@ -48,6 +48,7 @@
     <Compile Include="Assets\Script\Game\PoolingTile.cs" />
     <Compile Include="Assets\Script\Game\LevelManager.cs" />
     <Compile Include="Assets\Script\Game\Tile.cs" />
+    <Compile Include="Assets\Script\UI\IUiController.cs" />
     <Compile Include="Assets\Script\Game\SpawnTile.cs" />
     <Compile Include="Assets\Script\UI\UI_ChoseLevel.cs" />
     <Compile Include="Assets\Script\Game\TimeManager.cs" />
@@ -55,7 +56,10 @@
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\UI\UI_MainMenu.cs" />
     <Compile Include="Assets\Script\Enum\StatePosTile.cs" />
+    <Compile Include="Assets\Script\UI\UI_Manager.cs" />
+    <Compile Include="Assets\Script\UI\UI_MenuIngame.cs" />
     <Compile Include="Assets\Script\Game\TilePicker.cs" />
+    <Compile Include="Assets\Script\UI\UI_InGame.cs" />
     <Compile Include="Assets\Script\Game\Singleton.cs" />
     <Compile Include="Assets\Script\Game\GameRule.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
