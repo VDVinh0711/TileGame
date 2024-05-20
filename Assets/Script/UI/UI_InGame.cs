@@ -27,6 +27,8 @@ namespace UI_Game
         {
             GameManager.Instance.TimeManager.ActionChangeTime -= SetUpTextTime;
             GameManager.Instance.TimeManager.ActionChangeTime += SetUpTextTime;
+            GameManager.Instance.TimeManager.ActionChangeTime -= ActionSetUpStarInTime;
+            GameManager.Instance.TimeManager.ActionChangeTime += ActionSetUpStarInTime;
             _pauseGame.onClick.AddListener(ActionClickPause);
         }
 
@@ -45,12 +47,17 @@ namespace UI_Game
             _textLevel.SetText(beginTextLevel+ level);
         }
 
+        public void ActionSetUpStarInTime(int time)
+        {
+            var quantityStar = GameManager.Instance.CaculatorStar();
+            SetUpStar(quantityStar);
+        }
         public void SetUpStar(int star)
         {
             var lengthStart = _uiStars.Count;
             for (int i = 0; i < lengthStart; i++)
             {
-                if (i > star)
+                if (i > star-1)
                 {
                     _uiStars[i].gameObject.SetActive(false);
                 }

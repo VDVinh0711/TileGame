@@ -8,6 +8,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private List<LevelConfig> _levels = new();
     [SerializeField] private int _currentLevel;
     [SerializeField] private SpawnTile _spawnTile;
+    
     public List<LevelConfig> Levels => _levels;
     
     public int CurrentLevel
@@ -17,6 +18,17 @@ public class LevelManager : Singleton<LevelManager>
         {
             _currentLevel = value < 0 ? 0 : value;
         }
+    }
+
+    public void LoadLastLevelUnLock()
+    {
+        for (int i = 0; i < _levels.Count; i++)
+        {
+            if(_levels[i].IsLock==false) continue;
+            _currentLevel = i-1;
+            break;
+        }
+        LoadCurrentlevel();
     }
     
     public void LoadCurrentlevel()
@@ -29,12 +41,9 @@ public class LevelManager : Singleton<LevelManager>
         GameManager.Instance.TimeManager.InitTime(_levels[_currentLevel].Timelimit);
     }
     
-        
-     
      public void NextLevel()
      {
          _currentLevel++;
-         _levels[_currentLevel].IsLock = false;
          LoadCurrentlevel();
      }
      public int GetTotalTileInLevel()
@@ -46,6 +55,14 @@ public class LevelManager : Singleton<LevelManager>
          }
 
          return result;
+     }
+    
+     public void SaveDataLevel(int star)
+     {
+         print(star);
+         int starSave = _levels[_currentLevel].Star > star ? _levels[_currentLevel].Star : star;
+         _levels[_currentLevel+1].IsLock = false;
+         _levels[_currentLevel].Star = starSave;
      }
     
 }

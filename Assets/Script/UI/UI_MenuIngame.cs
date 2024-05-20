@@ -34,22 +34,26 @@ namespace UI_Game
 
         private void AcitonClickNextLevel()
         {
+            SoundManager.Instance.PlayAudioSFX("ClickButton");
             UI_Manager.Instance.OpenUIInGame();
             GameManager.Instance.NextLevel();
         }
 
         private void ActionClickReload()
         {
+            SoundManager.Instance.PlayAudioSFX("ClickButton");
             UI_Manager.Instance.OpenUIInGame();
             GameManager.Instance.Reload();        }
 
         private void ActionClickBackMenu()
         {
+            SoundManager.Instance.PlayAudioSFX("ClickButton");
             UI_Manager.Instance.OpenUIMainMenu();
         }
 
         private void ActionClickResume()
         {
+            SoundManager.Instance.PlayAudioSFX("ClickButton");
             GameManager.Instance.ResumeGame();
         }
 
@@ -64,12 +68,26 @@ namespace UI_Game
         public void OpenUi()
         {
             SetUpBegin();
+            SetUpStar(GameManager.Instance.CaculatorStar());
             _panel.gameObject.SetActive(true);   
         }
 
         public void CloseUI()
         {
             _panel.gameObject.SetActive(false); 
+        }
+
+        public void SetUpStar(int Star)
+        {
+            var lengthStart = _stars.Count;
+            for (int i = 0; i < lengthStart; i++)
+            {
+                if (i > Star-1)
+                {
+                    _stars[i].gameObject.SetActive(false);
+                }
+                    
+            }
         }
     }
 }

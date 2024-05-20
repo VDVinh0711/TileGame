@@ -51,10 +51,11 @@ public class SpawnTile : MonoBehaviour
                     allTileObj.Add(tileInstance);
                     tileInstance.position = spawnPosition;
                     Rigidbody rigidbody = tileInstance.GetComponent<Rigidbody>();
-                    if (rigidbody != null)
-                    {
+                     if (rigidbody != null)
+                     {
                         rigidbody.MovePosition(spawnPosition);
-                    }
+                        rigidbody.isKinematic = false;  
+                     }
                     SetUpAdapterTileSpawn(tileInstance, config);
                     //add to map position to prevent intersect
                     occupiedPositions.Add(tileInstance.transform);
@@ -63,6 +64,7 @@ public class SpawnTile : MonoBehaviour
                 at++;
             }
         }
+        occupiedPositions.Clear();
     }
     
     private void SetUpAdapterTileSpawn( Transform objSpawn, TileConfig tileConfig)

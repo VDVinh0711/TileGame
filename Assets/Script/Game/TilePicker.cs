@@ -31,14 +31,16 @@ public class TilePicker : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _canpick)
         {
+           
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hits;
             if (Physics.Raycast(ray, out hits))
             {
                 GameObject objClick  = hits.collider.gameObject;
-                if(objClick == null) return;
+                if(objClick == null || !objClick.gameObject.CompareTag("Tile")) return;
                 var tileClick = objClick.GetComponent<Tile>();
                 if(tileClick.StatePosTile == StatePosTile.inholder) return;
+                SoundManager.Instance.PlayAudioSFX("Click");
                 tileClick.UnSetGravity();
                 AddToContainer(tileClick);
                 MainSequence = DOTween.Sequence();

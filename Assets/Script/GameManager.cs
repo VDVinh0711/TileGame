@@ -6,11 +6,10 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
-    private int _star = 0;
+
     [SerializeField] private bool _isWin = false;
     [SerializeField] private bool _isLose = false;
     [SerializeField] private bool _isPause = false;
-  
     public UnityEvent OnWin;
     public UnityEvent OnLose;
     [SerializeField] private TimeManager _timeManager;
@@ -26,6 +25,8 @@ public class GameManager : Singleton<GameManager>
         OnWin?.Invoke();
         _isWin = true;
         _tilePicker.CanPick = false;
+        var star = CaculatorStar();
+        LevelManager.Instance.SaveDataLevel(star);
         UI_Manager.Instance.OpenUiMenuInGame();
         
     }
@@ -46,7 +47,7 @@ public class GameManager : Singleton<GameManager>
     public void PlayGame()
     {
         Clear();
-        LevelManager.Instance.LoadCurrentlevel();
+        LevelManager.Instance.LoadLastLevelUnLock();
         UI_Manager.Instance.OpenUIInGame();
         _tilePicker.Reset();
     }
@@ -79,12 +80,11 @@ public class GameManager : Singleton<GameManager>
         _tilePicker.Reset();
     }
 
-    private void CalculatorStar()
+    public int CaculatorStar()
     {
         var partTimeSize = _timeManager.timelimit /3;
         int currrentpart = (int)Mathf.Floor(_timeManager.playtime / partTimeSize);
-        
-        _star = 3 - currrentpart;
+        return currrentpart+1;
     }
     
 }

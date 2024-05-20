@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-
     [SerializeField] private int _playTime;
     [SerializeField] private int _timeLimit;
     Coroutine timecounter;
@@ -26,9 +25,7 @@ public class TimeManager : MonoBehaviour
         while (_playTime >0)
         {
             var gamemanager = GameManager.Instance;
-            var partTimeSize = _timeLimit /3;
-            int currrentpart = (int)Mathf.Floor(_playTime / partTimeSize);
-            print(3-currrentpart-1);
+           
             _playTime -= gamemanager.IsPause || gamemanager.IsWin || gamemanager.IsLose  ? 0 : 1;
             OnActionChangeTime();
             yield return new WaitForSeconds(1);

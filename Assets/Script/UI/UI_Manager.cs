@@ -9,7 +9,8 @@ namespace UI_Game
         [SerializeField] private RectTransform _uiChoseLevel;
         [SerializeField] private RectTransform _uiInGame;
         [SerializeField] private RectTransform _uiMenuInGame;
-         private IUiController _currentUI;
+        [SerializeField] private RectTransform _uiSetting;
+        private IUiController _currentUI;
         
         private void OpenUI(IUiController uiController)
         {
@@ -50,7 +51,11 @@ namespace UI_Game
         {
             HelpOpenUI(_uiInGame);
         }
-        
+
+        public void OpenUiSetting()
+        {
+            HelpOpenUI(_uiSetting);
+        }
 
 
         private void HelpOpenUI(RectTransform rectTransform)
