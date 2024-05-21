@@ -44,7 +44,7 @@ public class SpawnTile : MonoBehaviour
                 if (!positionOccupied)
                 {
                     Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                    var tileInstance =   PoolingTile.Instance.SpawnObj(tilePrefabs.name);
+                    var tileInstance =   PoolingTile.Instance.SpawnObj("Tile" ,tilePrefabs);
                     tileInstance.SetParent(_holder);
                     tileInstance.position = spawnPosition;
                     tileInstance.rotation = spawnRotation;
@@ -73,11 +73,21 @@ public class SpawnTile : MonoBehaviour
         itemtile.SetUpTile(tileConfig.id, tileConfig.Sprite);
         itemtile.StatePosTile = StatePosTile.incontain;
     }
+
+
+    public void ReSpawnTile(Tile tile)
+    {
+        tile.gameObject.SetActive(false);
+        Vector3 spawnPosition = new Vector3(Random.Range(_minX, _maxX), Random.Range(_minY, _maxY), 0);
+        tile.gameObject.transform.position = spawnPosition;
+        tile.gameObject.SetActive(true);
+    }
+    
     public void Clear()
     {
         foreach (var objSpawn in allTileObj)
         {
-            PoolingTile.Instance.DeSpawnObj(objSpawn.transform);
+            PoolingTile.Instance.DeSpawnObj("Tile",objSpawn.transform);
         }
         allTileObj.Clear();
     }

@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,7 +11,15 @@ namespace  UI_Game
         [SerializeField] private Transform _buttonPrefap;
         [SerializeField] private RectTransform _panel;
         [SerializeField] private List<UI_ButtonChoseLevel> _listUILevel = new();
-  
+        [SerializeField] private Button _btnBack;
+        [SerializeField] private RectTransform _panelHolLevel;
+
+
+        private void Awake()
+        {
+            _btnBack.onClick.AddListener(ActionBackClick);
+        }
+
         public void SetUpUiChoseLevel()
         {
             var levelManager = LevelManager.Instance;
@@ -22,7 +29,7 @@ namespace  UI_Game
                 if (btnUI == null)
                 {
                     var btnSpawn = Instantiate(_buttonPrefap);
-                    btnSpawn.SetParent(_panel);
+                    btnSpawn.SetParent(_panelHolLevel);
                     btnUI = btnSpawn.GetComponent<UI_ButtonChoseLevel>();
                     _listUILevel.Add(btnUI);
                 }
@@ -30,6 +37,13 @@ namespace  UI_Game
             }
         }
 
+
+
+        private void ActionBackClick()
+        {
+            UI_Manager.Instance.OpenUIMainMenu();
+        }
+        
 
         public void OpenUi()
         {

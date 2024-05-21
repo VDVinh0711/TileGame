@@ -69,7 +69,7 @@ namespace UI_Game
         
         public void OpenUi()
         {
-            SetUpLevel(LevelManager.Instance.CurrentLevel+1);
+            SetUpLevel(LevelManager.Instance.CurrentLevel);
            _panel.gameObject.SetActive(true);
         }
 

@@ -1,31 +1,53 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PoolingTile : Singleton<PoolingTile>
 {
    [SerializeField] private Transform _hoder;
-   [SerializeField] private List<Transform> _container;
+   public Dictionary<string, Queue<Transform>> poolDictionary;
    [SerializeField] private Transform _objPrefabs;
 
 
-   public void DeSpawnObj(Transform transform)
+   private void Awake()
    {
-      transform.gameObject.transform.position = Vector3.zero;
-      transform.gameObject.SetActive(false);
-      transform.SetParent(_hoder);
-      _container.Add(transform);
+      poolDictionary = new Dictionary<string, Queue<Transform>>();
    }
 
-   public Transform SpawnObj(string name)
+   public void DeSpawnObj(string nameTag , Transform transform)
    {
-      // var obj = _container.FirstOrDefault(x => x.name.Contains(name));
-      // if (obj!=null)
-      // {
-      //    _container.Remove(obj);
-      //    obj.gameObject.SetActive(true);
-      //    obj.position = Vector3.zero;
-      //    return obj;
-      // }
-      return  Instantiate(_objPrefabs,Vector3.zero, Quaternion.identity);
+      transform.gameObject.SetActive(false);
+      transform.gameObject.transform.position = Vector3.zero;
+      transform.SetParent(_hoder);
+      if (poolDictionary.ContainsKey(nameTag))
+      {
+         poolDictionary[nameTag].Enqueue(transform);
+         return;
+      }
+      Queue<Transform> pools = new Queue<Transform>();
+      pools.Enqueue(transform);
+      poolDictionary.Add(nameTag,pools);
    }
+
+   public Transform SpawnObj(string nameTag ,Transform objSpawn)
+   {
+      // if (poolDictionary.ContainsKey(nameTag))
+      // {
+      //    if(poolDictionary[nameTag].Count == 0) return Instantiate(objSpawn,Vector3.zero, Quaternion.identity);
+      //    var objreturn = poolDictionary[nameTag].Dequeue();
+      //    objreturn.gameObject.transform.position = Vector3.zero;
+      //    objreturn.gameObject.SetActive(true);
+      //    return objreturn;
+      // }
+      return  Instantiate(objSpawn,Vector3.zero, Quaternion.identity);
+   }
+}
+
+[System.Serializable]
+public class Pool
+{
+   public string tag;
+   public GameObject prefab;
+   public int size;
 }

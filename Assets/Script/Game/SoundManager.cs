@@ -21,7 +21,6 @@ public class SoundManager : Singleton<SoundManager>
 
     public void ToggleSoundBackGround()
     {
-
         if (_audioBackgorund.isPlaying)
         {
             _audioBackgorund.Stop();
@@ -32,12 +31,8 @@ public class SoundManager : Singleton<SoundManager>
 
     public void ToggleSoundSFX()
     {
-        if (_audioSFX.isPlaying)
-        {
-            _audioSFX.Stop();
-            return;
-        }
-        _audioSFX.Play();
+        bool checkEnable = _audioSFX.enabled;
+        _audioSFX.enabled = !checkEnable;
     }
 
 
