@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public UnityEvent OnLose;
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private TilePicker _tilePicker;
+    [SerializeField] private SpawnTile _spawnTile;
     public TimeManager TimeManager => _timeManager;
     public bool IsWin => _isWin;
     public bool IsLose => _isLose;
@@ -40,8 +41,9 @@ public class GameManager : Singleton<GameManager>
     public void Reload()
     {
         Clear();
-        LevelManager.Instance.LoadCurrentlevel();
         _tilePicker.Reset();
+        LevelManager.Instance.LoadCurrentlevel();
+       
     }
 
     public void PlayGame()
@@ -78,6 +80,8 @@ public class GameManager : Singleton<GameManager>
         _isLose = false;
         _isWin = false;
         _tilePicker.Reset();
+        _spawnTile.Clear();
+        
     }
 
     public int CaculatorStar()

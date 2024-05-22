@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 
 public class TilePicker : MonoBehaviour
@@ -13,7 +15,7 @@ public class TilePicker : MonoBehaviour
     private int _quantityPicker = 0;
     private Sequence MainSequence;
     public Vector3 spacing;
-    [SerializeField] private Stack<Tile> _historyTileClicks = new();
+    private Stack<Tile> _historyTileClicks = new();
     [SerializeField] private Transform _posConatainTile;
     [SerializeField] private List<Tile> containerTile = new();
     [SerializeField] private SpawnTile _spawnTile;
@@ -109,7 +111,7 @@ public class TilePicker : MonoBehaviour
             if(!containerTile[i].id.Equals(id))continue;
             containerTile[i].gameObject.transform.DOMove(Vector3.down * 5.0f + containerTile[i].gameObject.transform.position * 10.0f, 1f);
             yield return new WaitForSeconds(0.1f);
-            PoolingTile.Instance.DeSpawnObj("Tile",containerTile[i].transform);
+            _spawnTile.RemoveTile(containerTile[i]);
         }
         containerTile.RemoveAll(x => x.id.Equals(id));
         MainSequence.Append(Recallculate());
@@ -131,7 +133,12 @@ public class TilePicker : MonoBehaviour
     {
         _quantityPicker = 0;
         _canpick = true;
+        foreach (var tile in containerTile)
+        {
+            _spawnTile.RemoveTile(tile);
+        }
         containerTile.Clear();
+       
     }
 
 }

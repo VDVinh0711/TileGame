@@ -15,21 +15,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         LoadData();
     }
-
-    private void LoadData()
-    {
-        LevelData.Instance.Load();
-        for (int i = 0; i < _levels.Count; i++)
-        {
-            foreach (var dataLevel in LevelData.Instance.levelDatas)
-            {
-                if(i != dataLevel.idlevel) continue;
-                _levels[i].IsLock = dataLevel.isLock;
-                _levels[i].Star = dataLevel.star;
-            }
-        }
-    }
-
+    
     public int CurrentLevel
     {
         get => _currentLevel;
@@ -49,7 +35,6 @@ public class LevelManager : Singleton<LevelManager>
         }
         LoadCurrentlevel();
     }
-    
     public void LoadCurrentlevel()
     {
         _spawnTile.Clear();
@@ -59,13 +44,12 @@ public class LevelManager : Singleton<LevelManager>
         }
         GameManager.Instance.TimeManager.InitTime(_levels[_currentLevel].Timelimit);
     }
-    
-     public void NextLevel()
+    public void NextLevel()
      {
          _currentLevel++;
          LoadCurrentlevel();
      }
-     public int GetTotalTileInLevel()
+    public int GetTotalTileInLevel()
      {
          var result = 0;
          foreach (var itemLevel in _levels[_currentLevel].ItemLevels)
@@ -76,15 +60,8 @@ public class LevelManager : Singleton<LevelManager>
          return result;
      }
     
-     public void SaveDataLevel(int star)
-     {
-         print(star);
-         int starSave = _levels[_currentLevel].Star > star ? _levels[_currentLevel].Star : star;
-         _levels[_currentLevel+1].IsLock = false;
-         _levels[_currentLevel].Star = starSave;
-     }
-
-
+   
+     
      private void OnDestroy()
      {
          for(int i=0;i< _levels.Count;i++)
@@ -93,6 +70,26 @@ public class LevelManager : Singleton<LevelManager>
              LevelData.Instance.levelDatas.Add(levelSave);
          }
          LevelData.Instance.Save();
+     }
+     
+     private void LoadData()
+     {
+         LevelData.Instance.Load();
+         for (int i = 0; i < _levels.Count; i++)
+         {
+             foreach (var dataLevel in LevelData.Instance.levelDatas)
+             {
+                 if(i != dataLevel.idlevel) continue;
+                 _levels[i].IsLock = dataLevel.isLock;
+                 _levels[i].Star = dataLevel.star;
+             }
+         }
+     }
+     public void SaveDataLevel(int star)
+     {
+         int starSave = _levels[_currentLevel].Star > star ? _levels[_currentLevel].Star : star;
+         _levels[_currentLevel+1].IsLock = false;
+         _levels[_currentLevel].Star = starSave;
      }
 }
 

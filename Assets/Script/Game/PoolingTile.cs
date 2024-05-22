@@ -28,26 +28,15 @@ public class PoolingTile : Singleton<PoolingTile>
       Queue<Transform> pools = new Queue<Transform>();
       pools.Enqueue(transform);
       poolDictionary.Add(nameTag,pools);
+ 
    }
 
    public Transform SpawnObj(string nameTag ,Transform objSpawn)
    {
-      // if (poolDictionary.ContainsKey(nameTag))
-      // {
-      //    if(poolDictionary[nameTag].Count == 0) return Instantiate(objSpawn,Vector3.zero, Quaternion.identity);
-      //    var objreturn = poolDictionary[nameTag].Dequeue();
-      //    objreturn.gameObject.transform.position = Vector3.zero;
-      //    objreturn.gameObject.SetActive(true);
-      //    return objreturn;
-      // }
-      return  Instantiate(objSpawn,Vector3.zero, Quaternion.identity);
+       if (!poolDictionary.ContainsKey(nameTag) || poolDictionary[nameTag].Count == 0 )   return  Instantiate(objSpawn,Vector3.zero, Quaternion.identity);
+       var objreturn = poolDictionary[nameTag].Dequeue();
+       objreturn.gameObject.transform.position = Vector3.zero;
+       objreturn.gameObject.SetActive(true);
+       return objreturn;
    }
-}
-
-[System.Serializable]
-public class Pool
-{
-   public string tag;
-   public GameObject prefab;
-   public int size;
 }

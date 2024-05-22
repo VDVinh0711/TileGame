@@ -82,11 +82,19 @@ public class SpawnTile : MonoBehaviour
         tile.gameObject.transform.position = spawnPosition;
         tile.gameObject.SetActive(true);
     }
+
+
+    public void RemoveTile(Tile tile)
+    {
+        PoolingTile.Instance.DeSpawnObj("Tile",tile.transform);
+        allTileObj?.RemoveAt(0);
+    }
     
     public void Clear()
     {
         foreach (var objSpawn in allTileObj)
         {
+            print("Clear ");
             PoolingTile.Instance.DeSpawnObj("Tile",objSpawn.transform);
         }
         allTileObj.Clear();

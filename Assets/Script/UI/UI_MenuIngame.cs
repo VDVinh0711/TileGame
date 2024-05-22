@@ -35,8 +35,8 @@ namespace UI_Game
         private void AcitonClickNextLevel()
         {
             SoundManager.Instance.PlayAudioSFX("ClickButton");
-            UI_Manager.Instance.OpenUIInGame();
             GameManager.Instance.NextLevel();
+            UI_Manager.Instance.OpenUIInGame();
         }
 
         private void ActionClickReload()
@@ -49,6 +49,7 @@ namespace UI_Game
         {
             SoundManager.Instance.PlayAudioSFX("ClickButton");
             UI_Manager.Instance.OpenUIMainMenu();
+            GameManager.Instance.Clear();
         }
 
         private void ActionClickResume()
