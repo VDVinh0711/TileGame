@@ -5,18 +5,14 @@ using UnityEngine;
 public class SpawnTile : MonoBehaviour
 {
     [SerializeField] private Transform tilePrefabs;
-
     [Header("Position Spawn")] 
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
     [SerializeField] private float _maxY;
     [SerializeField] private float _minY;
-    
     [SerializeField] private float minimumDistance = 0.5f;
     [SerializeField] private int maxAttempts = 100;
     [SerializeField] private Transform _holder;
-
-   
     public List<Transform> allTileObj = new();
     public List<Transform> occupiedPositions = new();
 
@@ -44,18 +40,11 @@ public class SpawnTile : MonoBehaviour
                 if (!positionOccupied)
                 {
                     Quaternion spawnRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                    var tileInstance =   PoolingTile.Instance.SpawnObj("Tile" ,tilePrefabs);
+                    var tileInstance =   PoolingTile.Instance.SpawnObj(tilePrefabs);
                     tileInstance.SetParent(_holder);
                     tileInstance.position = spawnPosition;
                     tileInstance.rotation = spawnRotation;
                     allTileObj.Add(tileInstance);
-                    tileInstance.position = spawnPosition;
-                    Rigidbody rigidbody = tileInstance.GetComponent<Rigidbody>();
-                     if (rigidbody != null)
-                     {
-                        rigidbody.MovePosition(spawnPosition);
-                        rigidbody.isKinematic = false;  
-                     }
                     SetUpAdapterTileSpawn(tileInstance, config);
                     //add to map position to prevent intersect
                     occupiedPositions.Add(tileInstance.transform);
@@ -86,7 +75,7 @@ public class SpawnTile : MonoBehaviour
 
     public void RemoveTile(Tile tile)
     {
-        PoolingTile.Instance.DeSpawnObj("Tile",tile.transform);
+        PoolingTile.Instance.DeSpawnObj(tile.transform);
         allTileObj?.RemoveAt(0);
     }
     
@@ -94,8 +83,7 @@ public class SpawnTile : MonoBehaviour
     {
         foreach (var objSpawn in allTileObj)
         {
-            print("Clear ");
-            PoolingTile.Instance.DeSpawnObj("Tile",objSpawn.transform);
+            PoolingTile.Instance.DeSpawnObj(objSpawn.transform);
         }
         allTileObj.Clear();
     }

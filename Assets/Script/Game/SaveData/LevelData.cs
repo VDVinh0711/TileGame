@@ -29,7 +29,6 @@ public class LevelData
    public void Load()
    {
       string data = DataManager.LoadData("DataLevel");
-      Debug.Log(data);
       if (_instance == null)
       {
          _instance = new LevelData();

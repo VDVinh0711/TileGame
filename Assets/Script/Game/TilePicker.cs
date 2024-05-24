@@ -9,16 +9,20 @@ using Sequence = DG.Tweening.Sequence;
 
 public class TilePicker : MonoBehaviour
 {
-    const int _containLimit = 6;
+  
     private GameRule _gameRule;
     private bool _canpick = true;
     private int _quantityPicker = 0;
     private Sequence MainSequence;
     public Vector3 spacing;
-    private Stack<Tile> _historyTileClicks = new();
+  
+  
+    [SerializeField] private TileManager _tileManager;
     [SerializeField] private Transform _posConatainTile;
     [SerializeField] private List<Tile> containerTile = new();
     [SerializeField] private SpawnTile _spawnTile;
+    public int QuantityPick => _quantityPicker;
+    public int QuantityContain => containerTile.Count;
     public bool CanPick
     {
         get => _canpick;
@@ -39,13 +43,13 @@ public class TilePicker : MonoBehaviour
                 GameObject objClick  = hits.collider.gameObject;
                 if(objClick == null || !objClick.gameObject.CompareTag("Tile")) return;
                 var tileClick = objClick.GetComponent<Tile>();
-                SoundManager.Instance.PlayAudioSFX("Click");
+                SoundManager.Instance.PlayAudioSFX(Sound.clickget);
                 switch (tileClick.StatePosTile)
                 {
                     case StatePosTile.incontain :
                         tileClick.UnSetGravity();
                         AddToContainer(tileClick);
-                       _historyTileClicks.Push(tileClick);
+                       _tileManager._historyTileClicks.Push(tileClick);
                         break;
                     case StatePosTile.inholder :
                         RemovetoContainer(tileClick);
@@ -71,36 +75,28 @@ public class TilePicker : MonoBehaviour
         }
         containerTile.Add(tile);
     }
-    private void RemovetoContainer(Tile tile)
+    public void RemovetoContainer(Tile tile)
     {
         if(tile == null) return;
+        if(!containerTile.Contains(tile)) return;
         tile.StatePosTile = StatePosTile.incontain;
         _quantityPicker--;
         int gopos = containerTile.FindLastIndex(x => x.id == tile.id);
         containerTile.RemoveAt(gopos);
         _spawnTile.ReSpawnTile(tile);
-    }
-    public void UndoTile()
-    {
-        var tileUndo = _historyTileClicks.Pop();
-        if(tileUndo == null) return;
-        RemovetoContainer(tileUndo);
         MainSequence.Append(Recallculate());
     }
+   
     private void EndPicker()
     {
       var  result = _gameRule.Check(containerTile.ToArray(),out string res);
       if (result)
       {
-          StartCoroutine(DropOutItemInList(res));
-          if (_quantityPicker != LevelManager.Instance.GetTotalTileInLevel()) return;
-           GameManager.Instance.Win();
+         StartCoroutine(DropOutItemInList(res));
+          _tileManager.CheckWin();
           return;
       }
-      if (containerTile.Count == _containLimit)
-      {
-          GameManager.Instance.Lose();
-      }
+      _tileManager.CheckLose();
     }
     IEnumerator DropOutItemInList(string id)
     {
@@ -109,9 +105,10 @@ public class TilePicker : MonoBehaviour
         for (int i = 0; i < containerTile.Count; i++)
         {
             if(!containerTile[i].id.Equals(id))continue;
-            containerTile[i].gameObject.transform.DOMove(Vector3.down * 5.0f + containerTile[i].gameObject.transform.position * 10.0f, 1f);
+            var posOBJ = containerTile[i].gameObject.transform.position;
             yield return new WaitForSeconds(0.1f);
-            _spawnTile.RemoveTile(containerTile[i]);
+            containerTile[i].gameObject.transform.DOMove(new Vector3(0,posOBJ.y - 50,0), 0.3f * i);
+            
         }
         containerTile.RemoveAll(x => x.id.Equals(id));
         MainSequence.Append(Recallculate());
@@ -133,10 +130,6 @@ public class TilePicker : MonoBehaviour
     {
         _quantityPicker = 0;
         _canpick = true;
-        foreach (var tile in containerTile)
-        {
-            _spawnTile.RemoveTile(tile);
-        }
         containerTile.Clear();
        
     }

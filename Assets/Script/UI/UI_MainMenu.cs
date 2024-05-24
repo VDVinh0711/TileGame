@@ -31,20 +31,19 @@ namespace  UI_Game
         
         
         private void ActionClickPlay()
-        {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+        { SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
            GameManager.Instance.PlayGame();
         }
 
         private void ActionChoseLevel()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             UI_Manager.Instance.OpenUiChoseLevel();
         }
 
         private void ActionClickSetting()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             UI_Manager.Instance.OpenUiSetting();
         }
 

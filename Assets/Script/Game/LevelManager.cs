@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] private List<LevelConfig> _levels = new();
+    [SerializeField] public List<LevelConfig> _levels = new();
     [SerializeField] private int _currentLevel;
     [SerializeField] private SpawnTile _spawnTile;
     
@@ -13,7 +13,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Awake()
     {
-        LoadData();
+       LoadData();
     }
     
     public int CurrentLevel
@@ -46,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void NextLevel()
      {
+         if(_currentLevel == _levels.Count-1) return;
          _currentLevel++;
          LoadCurrentlevel();
      }
@@ -100,6 +101,14 @@ public class LevelConfig
     public int Timelimit;
     public bool IsLock = true;
     public int Star = 0;
+
+    public LevelConfig(List<TileConfig> listTile, int timelimit, bool isLock, int star = 0)
+    {
+        this.ItemLevels = listTile;
+        this.Timelimit = timelimit;
+        this.IsLock = isLock;
+        this.Star = star;
+    }
 }
 
 [Serializable]
@@ -108,4 +117,11 @@ public class TileConfig
     public string id;
     public Sprite Sprite;
     public int Quantity;
+
+    public TileConfig(string id, Sprite sprite, int quantity = 3)
+    {
+        this.id = id;
+        this.Sprite = sprite;
+        this.Quantity = quantity;
+    }
 }

@@ -1,34 +1,33 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Tile : MonoBehaviour
 {
    
    [SerializeField]  private Rigidbody _rb;
-   [SerializeField] private Collider _coli;
    public string id;
-   public MeshRenderer mesrenderer;
+   public MeshRenderer meshrenderer;
    public StatePosTile StatePosTile;
-   
+
    public void SetGravty()
    {
-     // _rb.useGravity = true;
       _rb.isKinematic = false;
    }
    public void UnSetGravity()
    {
-     // _rb.useGravity = false;
       _rb.isKinematic = true;
    }
    public void SetUpTile(string id, Sprite sprite)
    {
       this.id = id;
-      this.mesrenderer.material.mainTexture = sprite.texture;
+      this.meshrenderer.material.mainTexture = sprite.texture;
    }
-
    private void OnEnable()
    {
       SetGravty();
    }
+
+  
 }

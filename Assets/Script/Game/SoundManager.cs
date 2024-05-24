@@ -15,7 +15,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Start()
     {
-        PlayAudioBackGround("BackGround");
+        PlayAudioBackGround(Sound.background);
     }
 
 
@@ -36,14 +36,14 @@ public class SoundManager : Singleton<SoundManager>
     }
 
 
-    public void PlayAudioSFX(string name)
+    public void PlayAudioSFX(Sound name)
     {
         var audioclip = _soundsSFXs.FirstOrDefault(x => x.nameSound == name);
         if(audioclip == null) return;
         _audioSFX.PlayOneShot(audioclip.audiosource);
     }
 
-    public void PlayAudioBackGround(string name)
+    public void PlayAudioBackGround(Sound name)
     {
         // var audioclip = _soundsSFXs.FirstOrDefault(x => x.nameSound == name);
         // if(audioclip == null) return;
@@ -57,6 +57,6 @@ public class SoundManager : Singleton<SoundManager>
 [Serializable]
 public class DictionSound
 {
-    public string nameSound;
+    public Sound nameSound;
     public AudioClip audiosource;
 }

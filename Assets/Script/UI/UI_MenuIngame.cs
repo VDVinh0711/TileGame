@@ -22,8 +22,6 @@ namespace UI_Game
         {
             RegisterEvent();
         }
-
-
         private void RegisterEvent()
         {
             _btnBackMenu.onClick.AddListener(ActionClickBackMenu);
@@ -34,27 +32,27 @@ namespace UI_Game
 
         private void AcitonClickNextLevel()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             GameManager.Instance.NextLevel();
             UI_Manager.Instance.OpenUIInGame();
         }
 
         private void ActionClickReload()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             UI_Manager.Instance.OpenUIInGame();
             GameManager.Instance.Reload();        }
 
         private void ActionClickBackMenu()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             UI_Manager.Instance.OpenUIMainMenu();
             GameManager.Instance.Clear();
         }
 
         private void ActionClickResume()
         {
-            SoundManager.Instance.PlayAudioSFX("ClickButton");
+            SoundManager.Instance.PlayAudioSFX(Sound.clickbutton);
             GameManager.Instance.ResumeGame();
         }
 

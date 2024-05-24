@@ -179,7 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 8480804360774046880}
-  _coli: {fileID: 7890676544605295864}
   id: 
-  mesrenderer: {fileID: 3522436618238472048}
+  meshrenderer: {fileID: 3522436618238472048}
   StatePosTile: 0
