@@ -1,4 +1,5 @@
 Link Play Demo : https://laggerhatecode.itch.io/3stacktile?secret=muNPVka8bNh8M5EOO7iVq39SAHE
+Link Video Demo : https://youtu.be/LPMeFqeQy-I
 
 3STackTile  là một trò chơi 3D đơn giản, nơi người chơi phải chọn và kết hợp ba khối lập phương (cube) giống nhau để làm chúng biến mất. Trò chơi kết thúc khi tất cả các khối cube đã bị loại bỏ hoặc khi không còn đủ chỗ chứa.
 
