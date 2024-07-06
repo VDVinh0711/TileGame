@@ -49,7 +49,7 @@ public class TilePicker : MonoBehaviour
                     case StatePosTile.incontain :
                         tileClick.UnSetGravity();
                         AddToContainer(tileClick);
-                       _tileManager._historyTileClicks.Push(tileClick);
+                       _tileManager.historyTileClicks.Push(tileClick);
                         break;
                     case StatePosTile.inholder :
                         RemovetoContainer(tileClick);

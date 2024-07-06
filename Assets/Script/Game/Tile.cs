@@ -11,6 +11,15 @@ public class Tile : MonoBehaviour
    public MeshRenderer meshrenderer;
    public StatePosTile StatePosTile;
 
+
+   private void Update()
+   {
+      if (transform.position.y < -70)
+      {
+         transform.position = Vector3.zero;
+      }
+   }
+
    public void SetGravty()
    {
       _rb.isKinematic = false;

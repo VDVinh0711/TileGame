@@ -10,8 +10,7 @@ public class GameManager : Singleton<GameManager>
      private bool _isWin = false;
      private bool _isLose = false;
      private bool _isPause = false;
-    public UnityEvent OnWin;
-    public UnityEvent OnLose;
+   
     [SerializeField] private TimeManager _timeManager;
     [SerializeField] private TileManager _tileManager;
     [SerializeField] private SpawnTile _spawnTile;
@@ -23,7 +22,6 @@ public class GameManager : Singleton<GameManager>
     
     public void Win()
     {
-        OnWin?.Invoke();
         _isWin = true;
         var star = CaculatorStar();
         LevelManager.Instance.SaveDataLevel(star);
@@ -32,22 +30,27 @@ public class GameManager : Singleton<GameManager>
     }
     public void Lose()
     {
-        OnLose?.Invoke();
-        _isLose = false;
-  
+        _isLose = true;
         UI_Manager.Instance.OpenUiMenuInGame();
     }
     public void Reload()
     {
         Clear();
         LevelManager.Instance.LoadCurrentlevel();
-       
     }
 
     public void PlayGame()
     {
         Clear();
         LevelManager.Instance.LoadLastLevelUnLock();
+        UI_Manager.Instance.OpenUIInGame();
+        _tileManager.Reset();
+    }
+
+    public void PlayeGameChoseLevel()
+    {
+        Clear();
+        LevelManager.Instance.LoadCurrentlevel();
         UI_Manager.Instance.OpenUIInGame();
         _tileManager.Reset();
     }

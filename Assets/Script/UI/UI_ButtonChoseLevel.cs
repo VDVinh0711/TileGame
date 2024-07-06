@@ -2,9 +2,7 @@
 
 using System.Collections.Generic;
 using TMPro;
-
 using UnityEngine;
-
 using UnityEngine.UI;
 
 
@@ -45,7 +43,7 @@ namespace  UI_Game
         private void ActionButtonClick()
         {
             LevelManager.Instance.CurrentLevel = indexLevel;
-            GameManager.Instance.PlayGame();
+            GameManager.Instance.PlayeGameChoseLevel();
         }
 
 
